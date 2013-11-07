@@ -39,7 +39,7 @@ namespace CacheCowDemo.Api
 
         private static CacheKey GenerateCacheKey(string resourceUri, IEnumerable<KeyValuePair<string, IEnumerable<string>>> headers)
         {
-            var routePattern = resourceUri.Split('?')[0]; // ignore the query portion
+            var routePattern = RemoveQuerystring(resourceUri); // ignore the query portion
             return new CacheKey(resourceUri, headers.SelectMany(h => h.Value), routePattern);
         }
 
