@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CacheCowDemo.Common.Contact>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Contacts</h1>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNumbers)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @foreach (var number in item.ContactNumbers)
+                    {
+                        <span>@number.Number (@number.NumberType)</span><br/>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <h3>Add a contact</h3>
+    @Html.Partial("_AddContactForm", new CacheCowDemo.Common.AddContactCommand())
+</body>
+</html>
